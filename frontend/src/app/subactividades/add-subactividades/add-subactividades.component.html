@@ -1,0 +1,53 @@
+<br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h5>
+        <b>
+          <mat-icon>loupe</mat-icon> Seleccione una subactividad
+        </b>
+      </h5>
+      <hr>
+      <div mat-dialog-content>
+        <div>
+          <div>
+            <mat-form-field style="width:250px">
+              <mat-label>Seleccione un subactividad</mat-label>
+              <mat-select name="si" style="height: auto;">
+                <mat-option *ngFor="let sub of subactividades" value="{{sub.stvasty_code}}"
+                  (click)="catchSub(sub.stvasty_code, sub.stvasty_desc); comprobarSub()">
+                  {{sub.stvasty_code}} - {{sub.stvasty_desc}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div *ngIf="horaActivar">
+            <mat-form-field>
+              <input matInput placeholder="Número de horas" [(ngModel)]="hora"
+                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;" onpaste="return false"
+                minlength="1" maxlength="2" type="number" min="1" pattern="^[0-9]+" required>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="error">
+        <mat-error>
+          Esta subactividad ya existe en este periodo
+        </mat-error>
+      </div>
+      <div *ngIf="maxHora">
+        <mat-error>
+          Supera el máximo de horas
+        </mat-error>
+      </div>
+      <div mat-dialog-actions>
+        <div class="col-md-6">
+          <button mat-raised-button type="submit" class="btn btn-primary pull-right" *ngIf="activar" (click)=" sumaHorasSub()">AGREGAR</button>
+        </div>
+        <div class="col-md-6">
+          <button mat-raised-button mat-dialog-close type="submit" class="btn btn-danger pull-right">CANCELAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

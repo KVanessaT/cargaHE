@@ -1,0 +1,85 @@
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h5>
+                <b>
+                    <mat-icon>loupe</mat-icon> Agregar una actividad
+                </b>
+            </h5>
+            <hr>
+            <div mat-dialog-content>
+                <div>
+                    <div>
+                        <mat-form-field style="width: 250px;">
+                            <mat-label>Seleccione una actividad</mat-label>
+                            <mat-select name="si" style="height: auto;width: 260px;">
+                                <mat-option style="width: 300px;" *ngFor="let act of activ" value="{{act.ptvjactCode}}"
+                                    (click)="getActividad(act.ptvjactCode, act.ptvjactDesc); comprobarAct()">
+                                    {{act.ptvjactCode}} - {{act.ptvjactDesc}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="div1">
+                        <mat-form-field>
+                            <input matInput placeholder="Número de horas" [(ngModel)]="hora"
+                                onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                onpaste="return false" minlength="1" maxlength="2" type="number" min="1" pattern="^[0-9]+" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div *ngIf="div2">
+                        <!-- <div>
+                            <mat-form-field>
+                                <input matInput placeholder="Número de horas" [(ngModel)]="hora"
+                                    onkeypress="if(isNaN(String.fromCharCode(event.keyCode))) return false;"
+                                    onpaste="return false" minlength="1" maxlength="2" type="number" min="1" pattern="^[1-9]+" required>
+                            </mat-form-field>
+                        </div> -->
+                        <div>
+                            <mat-form-field>
+                                <input matInput placeholder="Unidad Gestion" [(ngModel)]="unidadG">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <input matInput placeholder=" Responsable" [(ngModel)]="responsable">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div *ngIf="error">
+                        <mat-error>
+
+                            Esta actividad ya existe en este periodo
+
+                        </mat-error>
+                        <!-- <div class="alert alert-danger">
+                            Esta actividad ya existe en este periodo.
+                              </div> -->
+                    </div>
+                    <div *ngIf="maxHora">
+                        <mat-error>
+                            Supera el máximo de horas
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div mat-dialog-actions>
+                <div class="col-md-6">
+
+                    <button mat-raised-button type="submit" class="btn btn-primary pull-right" (click)="guardarM()"
+                        *ngIf="activar">AGREGAR
+                    </button>
+                </div>
+                <div class="col-md-6">
+
+                    <button mat-raised-button mat-dialog-close type="submit" class="btn btn-danger pull-right">CANCELAR
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

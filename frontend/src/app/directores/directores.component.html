@@ -1,0 +1,101 @@
+
+<div class="card">
+  <div class="card-header card-header-danger">
+    <h4 class="card-title">Carga Horaria de Docentes </h4>
+    <p class="card-category">Actividades y subactividades de los docentes en un determinado período académico</p>
+  </div>
+  <br>
+  <div class="container-fluid">
+    <!-- <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+
+          </div>
+          <div class="col-md-4">
+            <button mat-raised-button type="submit" class="btn btn-primary pull-right" (click)="getDocentes()">CONSULTAR
+              DOCENTES</button>
+          </div>
+          <div class="col-md-4">
+
+          </div>
+
+        </div>
+      </div>
+    </div> -->
+    <br>
+    <p-table #dt [columns]="cols" [value]="personas" [paginator]="true" [rows]="4" selectionMode="single"
+      [rowsPerPageOptions]="[4,10,20]">
+      <ng-template pTemplate="caption">
+        <div class="container-fluid">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-3">
+                <button mat-raised-button type="submit" class="btn btn-primary pull-right"
+                  (click)="getDocentes()">CONSULTAR
+                  DOCENTES</button>
+              </div>
+              <div class="col-md-6" style="text-align: center; color: darkblue;">
+                <h4> <b> LISTADO DE DOCENTES</b></h4>
+              </div>
+              <div class="col-md-3">
+                <div style="text-align: right">
+                  <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                  <input type="text" pInputText size="25" placeholder="Filtro Global"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 20%; text-align: center;color: darkblue;">ID </th>
+          <th style="width: 25%; text-align: center;color: darkblue;">NOMBRES</th>
+          <th style="width: 25%; text-align: center;color: darkblue;">APELLIDOS</th>
+          <th style="width: 20%; text-align: center;color: darkblue;">DEDICACION</th>
+
+          <th rowspan="2" style="width: 10%; text-align: center;color: darkblue;">Opciones
+            <br>
+            <i class="material-icons">
+              toc
+            </i>
+          </th>
+        </tr>
+        <tr>
+          <th *ngFor="let col of columns" [ngSwitch]="col.field">
+            <input *ngSwitchCase="'id_banner'" pInputText type="text" placeholder="" class="ui-column-filter"
+              style="width: 100%;" (input)="dt.filter($event.target.value, col.field, 'startsWith')">
+            <input *ngSwitchCase="'nombres'" pInputText type="text" placeholder="" class="ui-column-filter"
+              style="width: 100%;" (input)="dt.filter($event.target.value, col.field, 'contains')">
+            <input *ngSwitchCase="'apellido'" pInputText type="text" placeholder="" class="ui-column-filter"
+              style="width: 100%;" (input)="dt.filter($event.target.value, col.field, 'contains')">
+            <input *ngSwitchCase="'dedicacion'" pInputText type="text" placeholder="" class="ui-column-filter"
+              style="width: 100%;" (input)="dt.filter($event.target.value, col.field, 'contains')">
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+          <td style="text-align: center;">{{rowData.id_banner}}</td>
+          <td style="text-align: center;">{{rowData.nombres}}</td>
+          <td style="text-align: center;">{{rowData.apellido}}</td>
+          <td style="text-align: center;">{{rowData.dedicacion}}</td>
+          <td style="width: 8em; text-align: center;">
+            <button class="btn" (click)="periodoComponent(rowData.pebempl_pidm, rowData.code)"><i
+                class="fa fa-eye"></i></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td colspan="5">
+            <p style="justify-content: center; color: darkblue;"> No se encontraron registros</p>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <br>
+  </div>
+</div>

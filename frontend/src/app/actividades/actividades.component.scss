@@ -1,0 +1,56 @@
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: RoyalBlue;
+  }
+  .card-prof{
+    border-color: red($color: #e71b1b);
+  }
+
+  .lab{
+  color: black;
+  }
+  .button {
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    border: 1px inset #f04cff;
+    padding: 12px 16px;
+    font-size: 20px;
+  }
+
+  .btnn {
+    background-color: DodgerBlue;
+    border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    border: 0px inset #f04cff;
+
+    color: white;
+    padding: 8px 13px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: right;;
+  }
+  .btnn:hover {
+    background-color: RoyalBlue;
+  }
+
+  .modal-header{
+    text-align: center;
+  }
+
+  .lab1{
+    color: mediumblue;
+    }
+
+    .lab2{
+      color: rgba(245, 41, 102, 0.932);
+      }
+    

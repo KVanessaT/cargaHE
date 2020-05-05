@@ -1,0 +1,13 @@
+.footer {
+	width: 81%;
+	height: 50px;
+	background: #008F39 ;
+	position: fixed;
+	bottom: 0;
+	align-content: center;
+}
+.container{
+	color: aliceblue;
+	align-content: center;
+
+}

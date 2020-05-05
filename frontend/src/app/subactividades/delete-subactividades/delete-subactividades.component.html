@@ -1,0 +1,42 @@
+<h2 mat-dialog-title style="text-align: center;">Eliminar Actividad</h2>
+<!-- <mat-icon>add</mat-icon> -->
+<hr>
+<mat-dialog-content>
+  <p class="alerta">
+    <mat-error>
+      <strong>¿Está seguro que desea eliminar esta subactividad?</strong>
+    </mat-error>
+
+  </p>
+  <!-- <p style="text-align:center"> -->
+    <!-- <br>Actividad a eliminar: <br> -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-9"> 
+              <label for="" class="label"><strong> Nombre de la subactividad:</strong></label><br>
+              <strong>{{data.objeto.id.codSubact}} - {{data.descripcion.stvasty_desc}}</strong>
+            </div>
+            <div class="col-md-2">
+              <label for="" class="label"><strong>Horas:</strong> </label><br><p >{{data.descripcion.perjact_std_hrs_per_pay}}</p>
+            </div>
+            <div class="col-md-1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="justify-content: center">
+  <button mat-raised-button   type="submit" class="btn btn-info pull-right" (click)="eliminarSub()">Eliminar</button>
+
+  <button mat-raised-button mat-dialog-close type="submit" class="btn btn-danger pull-right" >CANCELAR
+  </button>
+</mat-dialog-actions>

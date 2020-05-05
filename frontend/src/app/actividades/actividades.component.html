@@ -1,0 +1,242 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-danger">
+          <h4 class="card-title">Actividades y subactividades</h4>
+        </div>
+        <div class="container-fluid">
+          <div class="col-md-12">
+
+            <div class="card" style="background-color: khaki;">
+              <div class="card-body">
+                <form>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label class="lab"><strong>Campus:</strong> </label>
+                      <strong class="lab"> {{docente.campus}}</strong>
+                    </div>
+                    <div class="col-md-4">
+
+                      <label class="lab"> <strong>Departamento:</strong> </label>
+                      <strong> {{docente.departamento}}</strong>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label class="lab"><strong>Docente: </strong> </label>
+                      <strong> {{docente.apellido}} {{docente.nombres}}</strong>
+
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4">
+
+                      <label class="lab"> <strong>ID Banner: </strong> </label>
+                      <strong> {{docente.idBanner}}</strong>
+                    </div>
+                    <div class="col-md-4">
+                      <label class="lab"> <strong>Dedicación: </strong> </label>
+                      <strong> {{docente.dedicacion}} </strong>
+                      &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info" data-toggle="modal"
+                        data-target="#myModal">
+                        <i class="fa fa-question"></i></button>
+                      <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+                            <div class="modal-header" style="text-align: center;">
+                              <h4 class="modal-title"> <strong class="lab2">  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Horas de dedicación</strong> </h4>
+
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body" style="text-align: justify;">
+                              <p><strong class="lab1">TIEMPO COMPLETO →</strong> máximo 40 horas</p>
+                              <p> <strong class="lab1">MEDIO TIEMPO →</strong> máximo 20 horas</p>
+                              <p> <strong class="lab1">TIEMPO PARCIAL →</strong> máximo19 horas</p>
+
+                            </div>
+                            <div class="modal-footer" style="justify-content: center;">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- <div id="demo" class="collapse hidden-lg-up float-xs-right">
+                        <p><b>TIEMPO COMPLETO </b> → 40 horas,</p>
+                        <p><b> MEDIO TIEMPO</b> → 20 horas,</p>
+                        <p><b> TIEMPO PARCIAL</b> → 19 horas</p>
+                      </div> -->
+                    </div>
+                    <div class="col-md-4">
+                      <label class="lab"> <strong>Periodo:</strong> </label>
+                      <strong> {{period}} {{descPeriodo}}</strong>
+                      &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-info" (click)="getPer();">CAMBIAR DE
+                        PERIODO</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-7">
+                <p-table #dt [columns]="cols" [value]="actividades" [paginator]="true" [rows]="5" selectionMode="single"
+                  [rowsPerPageOptions]="[3,5]">
+                  <ng-template pTemplate="caption">
+                    <div class="container-fluid">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-9">
+                            <h4 style="text-align: center;color: darkblue;"><b>LISTADO DE ACTIVIDADES</b> </h4>
+
+                          </div>
+                          <div class="col-md-3">
+
+                            <button mat-raised-button class="btn btn-primary pull-right" (click)="agregarAct()">
+                              <mat-icon>add</mat-icon>
+                              <span>Agregar</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th style="width: 9%; text-align: center;color: darkblue;">Cod</th>
+                      <th style="width: 40%; text-align: center;color: darkblue;">Actividad </th>
+                      <th style="width: 12%; text-align: center;color: darkblue;">Horas</th>
+                      <th rowspan="2" style="width: 14%; text-align: center;color: darkblue;">
+                      </th>
+                      <th rowspan="2" style="width: 25%; text-align: center;color: darkblue;">Opc. Subact
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+                      <td style="text-align: center;">{{rowData.pzptcabperjact_actividad}}</td>
+                      <td style="text-align: center;">{{rowData.ptvjact_desc}}</td>
+                      <td style="text-align: center;">{{rowData.pzptcabperjact_horas}}</td>
+                      <td style="width: 8em; text-align: center;">
+                        <button class="btn"
+                          (click)="eliminarAct(rowData.pzptcabperjact_actividad, rowData.ptvjact_desc, rowData.pzptcabperjact_horas);getSubActiv()"><i
+                            class="fa fa-trash"></i></button>
+                        <!-- <button class="btn" (click)="prueba()"><i class="fa fa-trash"></i></button> -->
+                      </td>
+                      <td style="width: 8em; text-align: center;">
+                        <button class="btn"
+                          (click)="guardarCodAct(rowData.pzptcabperjact_actividad, rowData.pzptcabperjact_horas, rowData.ptvjact_desc ); getSubActiv()"><i
+                            class="fa fa-eye"></i></button>
+                        <button class="btn "
+                          (click)="agregarSubAct(rowData.pzptcabperjact_actividad, rowData.pzptcabperjact_horas, rowData.ptvjact_desc);getSubActiv()"><i
+                            class="fa fa-plus"></i></button>
+                        <!-- <button class="btn" (click)="editarAct()"><i class="fa fa-edit"></i></button> -->
+
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="summary" style="height: min-content;">
+                    <td colspan="2" style="color: darkblue;">
+                      Total Horas: {{horSub}}
+
+                    </td>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                      <td colspan="6">
+                        <p style="justify-content: center;color: darkblue;">No se encontraron registros</p>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+                <br>
+                <label class="lab1" for="">Progreso de ingreso de las actividades</label>
+                <p-progressBar [value]="value"></p-progressBar>
+                <br>
+                <div *ngIf="alertA" class="alert alert-info" role="alert">
+                  <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                </div>
+                <div *ngIf="alertR" class="alert alert-danger" role="alert">
+                  <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                </div>
+              </div>
+              <div class="col-md-5">
+                <p-table #dt [columns]="cols" [value]="subactividad" [paginator]="false" [rows]="5"
+                  selectionMode="single" [rowsPerPageOptions]="[3,5]">
+                  <ng-template pTemplate="caption">
+                    <h4 style="text-align: center;color: darkblue;"><b>SUBACTIVIDADES</b> </h4>
+                  </ng-template>
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th style="width: 16%; text-align: center;color: darkblue;">Cod</th>
+                      <th style="width: 35%; text-align: center;color: darkblue;">Subactividad</th>
+                      <th style="width: 17%; text-align: center;color: darkblue;">Horas </th>
+                      <th rowspan="2" style="width: 33%; text-align: center;color: darkblue;">Opciones
+                      </th>
+                    </tr>
+
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
+                      <td style="text-align: center;">{{rowData.perjact_asty_code}}</td>
+                      <td style="text-align: center;">{{rowData.stvasty_desc}}</td>
+                      <td style="text-align: center;">{{rowData.perjact_std_hrs_per_pay}}</td>
+
+                      <td style="width: 8em; text-align: center;">
+                        <button class="btn" (click)="editarSubAct(rowData)"><i class="fa fa-edit"></i></button>
+                        <button class="btn" (click)="eliminarSubAct(rowData)"><i class="fa fa-trash"></i></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="summary" style="height: min-content;">
+                    <td colspan="2" style="color: darkblue;">
+                      Total Horas: {{horAct}}
+                    </td>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                      <td colspan="6">
+                        <p style="justify-content: center;color: darkblue;">No se encontraron registros</p>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+                <br>
+                <p-chart type="doughnut" [data]="dona"></p-chart>
+                <br>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-info" (click)="cancel()">
+                    <i class="fa fa-hand-o-left"></i>&nbsp; Regresar </button>
+                </div>
+                <div class="col-md-2">
+                  <a [routerLink]="['/dashboard']" class="btn btn-info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Salir
+                    &nbsp;&nbsp;&nbsp; <i class="fa fa-sign-out"></i></a>
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>

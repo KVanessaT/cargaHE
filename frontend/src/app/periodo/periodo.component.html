@@ -1,0 +1,54 @@
+<br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h5>
+        <b>
+          <mat-icon>loupe</mat-icon> Seleccione un periodo
+        </b>
+      </h5>
+      <hr>
+      <div mat-dialog-content>
+        <div>
+          <div>
+            <mat-form-field style="width:320px">
+              <mat-label>Seleccione un periodo</mat-label>
+              <mat-select name="si">
+
+
+
+                <mat-select-filter [placeholder]="'Buscar...'" [displayMember]="'stvtermCode'"
+                  [array]="periodos" (filteredReturn)="filteredList1 =$event"></mat-select-filter>
+
+                <!-- <div class="col-md-6">
+                          <mat-select-filter [placeholder]="'descripcion'" [displayMember]="'stvtermDesc'"
+                            [array]="periodos" (filteredReturn)="filteredList1 =$event"></mat-select-filter>
+                        </div> -->
+
+                <mat-option *ngFor="let per of filteredList1" value="{{per.stvtermCode}}"
+                  (click)="guardarPer(per.stvtermCode,per.stvtermEndDate, per.stvtermStartDate, per.code);">
+                  {{per.stvtermCode}} - {{per.stvtermDesc}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div mat-dialog-actions>
+        <div class="col-md-6">
+
+          <button mat-raised-button mat-dialog-close type="submit" class="btn btn-primary pull-right"
+            (click)="getActividades()">CONSULTAR
+          </button>
+        </div>
+        <div class="col-md-6">
+
+          <button mat-raised-button mat-dialog-close type="submit" class="btn btn-danger pull-right">CANCELAR
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
